@@ -41,6 +41,7 @@
 		E34957BD199FFEC800BB7247 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E34957BE199FFEC800BB7247 /* manvsmagicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manvsmagicTests.swift; sourceTree = "<group>"; };
 		E37FB5D719A551840082C9E7 /* ListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
+		E37FB5DB19A552C50082C9E7 /* manvsmagic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "manvsmagic-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +93,7 @@
 				E34957AF199FFEC800BB7247 /* Main.storyboard */,
 				E34957B2199FFEC800BB7247 /* Images.xcassets */,
 				E34957A7199FFEC800BB7247 /* Supporting Files */,
+				E37FB5DB19A552C50082C9E7 /* manvsmagic-Bridging-Header.h */,
 			);
 			path = manvsmagic;
 			sourceTree = "<group>";
@@ -473,9 +475,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = manvsmagic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "manvsmagic/manvsmagic-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -485,9 +490,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = manvsmagic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "manvsmagic/manvsmagic-Bridging-Header.h";
 			};
 			name = Release;
 		};

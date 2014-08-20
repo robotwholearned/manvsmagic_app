@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3D8CE330E99A4E27A87ADD98"
-               BuildableName = "libPods-manvsmagic-MWFeedParser.a"
-               BlueprintName = "Pods-manvsmagic-MWFeedParser"
+               BlueprintIdentifier = "B86838303A884980AE183EC3"
+               BuildableName = "libPods-manvsmagic-SVProgressHUD.a"
+               BlueprintName = "Pods-manvsmagic-SVProgressHUD"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

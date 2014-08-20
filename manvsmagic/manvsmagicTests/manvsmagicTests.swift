@@ -34,6 +34,7 @@ class manvsmagicTests: XCTestCase {
     }
     func testFeedFetchIsNotEmpty(){
         
+       // XCTAssert(<#expression: @autoclosure () -> BooleanType##@autoclosure () -> BooleanType#>, <#message: String#>)
     }
     
 }
