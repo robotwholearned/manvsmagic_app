@@ -8,10 +8,41 @@
 
 import UIKit
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, MWFeedParserDelegate{
   
   var detailViewController: DetailViewController? = nil
   var objects = NSMutableArray()
+  var items = [MWFeedItem]()
+  
+  
+  func request() {
+    let URL = NSURL(string: "http://www.manvsmagic.com/feed.xml")
+    let feedParser = MWFeedParser(feedURL: URL);
+    feedParser.delegate = self
+    feedParser.parse()
+  }
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    request()
+  }
+  
+  func feedParserDidStart(parser: MWFeedParser) {
+    SVProgressHUD.show()
+    self.items = [MWFeedItem]()
+  }
+  func feedParserDidFinish(parser: MWFeedParser) {
+    SVProgressHUD.dismiss()
+    self.tableView.reloadData()
+  }
+  func feedParser(parser: MWFeedParser, didParseFeedInfo info: MWFeedInfo) {
+    println(info)
+    self.title = info.title
+  }
+  func feedParser(parser: MWFeedParser, didParseFeedItem item: MWFeedItem) {
+    println(item)
+    self.items.append(item)
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()
@@ -51,9 +82,9 @@ class MasterViewController: UITableViewController {
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     if segue.identifier == "showDetail" {
       let indexPath = self.tableView.indexPathForSelectedRow()
-      let object = objects[indexPath.row] as NSDate
+      let item = self.items[indexPath.row] as MWFeedItem
       let controller = (segue.destinationViewController as UINavigationController).topViewController as DetailViewController
-      controller.detailItem = object
+      controller.detailItem = item
       controller.navigationItem.leftBarButtonItem = self.splitViewController.displayModeButtonItem()
       controller.navigationItem.leftItemsSupplementBackButton = true
     }
@@ -66,20 +97,30 @@ class MasterViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return objects.count
+    return self.items.count
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-    
-    let object = objects[indexPath.row] as NSDate
-    cell.textLabel.text = object.description
+    self.configureCell(cell, atIndexPath: indexPath)
     return cell
   }
   
   override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
     // Return false if you do not want the specified item to be editable.
     return false
+  }
+  
+  func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+    let item = self.items[indexPath.row] as MWFeedItem
+    cell.textLabel.text = item.title
+    cell.textLabel.font = UIFont.systemFontOfSize(14.0)
+    cell.textLabel.numberOfLines = 0
+    
+//    let projectURL = item.link.componentsSeparatedByString("?")[0]
+//    let imgURL: NSURL = NSURL(string: projectURL + "/cover_image?style=200x200#")
+//    cell.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+//    cell.imageView.setImageWithURL(imgURL, placeholderImage: UIImage(named: "logo.png"))
   }
   
   
